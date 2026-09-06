@@ -10,7 +10,7 @@ use crate::*;
 pub struct WebSocketsSvc;
 
 impl Service<RequestCx> for WebSocketsSvc {
-    type Response = HttpResponse;
+    type Response = ResponseCx;
 
     type Error = RequestError;
 
@@ -102,7 +102,7 @@ impl Service<RequestCx> for WebSocketsSvc {
                 .expect("Cannot upgrade connection to WebSockets.");
 
             if let ExecutionTarget::Socket(socket_target) = endpoint.execution_target() {
-                if let Some(execute_strategy) = socket_target.execute() {
+                if let Some(execute_strategy) = socket_target.executor() {
                     let execute_strategy = execute_strategy.to_owned();
 
                     let request_params = request_params.to_owned();
@@ -134,15 +134,13 @@ impl Service<RequestCx> for WebSocketsSvc {
                 unreachable!()
             }
 
-            return Ok(HttpResponse::new_with_status(
+            return Ok(ResponseCx::new_with_status(
                 StatusCode::SWITCHING_PROTOCOLS,
-                Some(
-                    response
-                        .headers()
-                        .iter()
-                        .map(|(key, value)| (key.as_str().into(), value.to_str().unwrap().into()))
-                        .collect::<HashMap<_, _>>(),
-                ),
+                response
+                    .headers()
+                    .iter()
+                    .map(|(key, value)| (key.as_str().into(), value.to_str().unwrap().into()))
+                    .collect::<HashMap<_, _>>(),
                 None,
             ));
         })

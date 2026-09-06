@@ -8,7 +8,7 @@ use crate::*;
 pub struct SignUpSvc;
 
 impl Service<RequestCx> for SignUpSvc {
-    type Response = HttpResponse;
+    type Response = ResponseCx;
 
     type Error = RequestError;
 
@@ -129,7 +129,7 @@ impl Service<RequestCx> for SignUpSvc {
                         .into(),
                     );
 
-                    Ok(HttpResponse::new(None, Some(BodyValue::Json(
+                    Ok(ResponseCx::new(Default::default(), Some(BodyValue::Json(
                         json!({
                             "token": session_token
                         }),

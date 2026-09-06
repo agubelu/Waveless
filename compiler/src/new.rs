@@ -6,7 +6,7 @@
 //!
 use crate::*;
 
-use waveless_sql::http_execute::{mysql::*, *};
+use waveless_sql::http_executor::{mysql::*, *};
 
 /// Create a new project in the current dir with the specified name
 #[instrument(skip_all)]
@@ -58,12 +58,15 @@ pub fn new_project(name: CompactString) -> Result<ResultContext> {
                         .route("/products/{size}".into())
                         .version("v1".into())
                         .method(HttpMethod::Get)
-                        .execute(Arc::<MySQLExecute>::new(
-                            SQLQueryWrapper::new(
-                                "SELECT * FROM products WHERE size = {size}".into(),
+                        .execution_pipeline(
+                            Arc::<MySQLExecute>::new(
+                                SQLQueryWrapper::new(
+                                    "SELECT * FROM products WHERE size = {size}".into(),
+                                )
+                                .into(),
                             )
                             .into(),
-                        ))
+                        )
                         .build()
                         .unwrap(),
                 ))
@@ -77,9 +80,12 @@ pub fn new_project(name: CompactString) -> Result<ResultContext> {
                         .route("posts".into())
                         .version("v1".into())
                         .method(HttpMethod::Get)
-                        .execute(Arc::<MySQLExecute>::new(
-                            SQLQueryWrapper::new("SELECT * FROM posts".into()).into(),
-                        ))
+                        .execution_pipeline(
+                            Arc::<MySQLExecute>::new(
+                                SQLQueryWrapper::new("SELECT * FROM posts".into()).into(),
+                            )
+                            .into(),
+                        )
                         .build()
                         .unwrap(),
                 ))

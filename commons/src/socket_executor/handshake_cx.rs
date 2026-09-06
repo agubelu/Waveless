@@ -4,7 +4,7 @@
 use crate::*;
 
 use endpoint::*;
-use http_execute::*;
+use http_executor::*;
 
 /// TODO: add docs.
 #[derive(Getters, MutGetters, Debug)]

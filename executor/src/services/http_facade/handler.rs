@@ -10,7 +10,7 @@ use crate::*;
 pub struct ExecuteHandler;
 
 impl Service<RequestCx> for ExecuteHandler {
-    type Response = HttpResponse;
+    type Response = ResponseCx;
 
     type Error = RequestError;
 
@@ -34,19 +34,24 @@ impl Service<RequestCx> for ExecuteHandler {
             };
 
             // Executes request.
-            let Some(execute_strategy) = http_target.execute() else {
+            let Some(execute_strategy) = http_target.execution_pipeline() else {
                 return Err(RequestError::Expected(
                     StatusCode::INTERNAL_SERVER_ERROR,
                     format!("The route doesn't have any executor defined. HINT: Go to your project's endpoints folder and check that '{}' has an executor set.", endpoint.id()).into(),
                 ));
             };
 
-            execute_strategy
+            // Build the pipeline cx.
+            let pipeline_cx = PipelineCx::new(cx, None);
+
+            let (PipelineCx { response, .. }, _) = execute_strategy.executor()
                 .execute(
-                    cx,
+                    pipeline_cx,
                     db_conns,
                 )
-                .await
+                .await?;
+
+            Ok(response.unwrap())
         }).into();
 
         future as Self::Future // `rust-analyzer` complains here.

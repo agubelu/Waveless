@@ -5,12 +5,12 @@ pub mod auth;
 pub mod databases;
 pub mod endpoint;
 pub mod entry;
-pub mod http_execute;
+pub mod http_executor;
 pub mod logging;
 pub mod object;
 pub mod project;
 pub mod schema;
-pub mod socket_execute;
+pub mod socket_executor;
 
 #[cfg(not(target_arch = "wasm32"))]
 pub mod runtime;
@@ -59,6 +59,8 @@ pub type ResultContext = CompactString; // TODO: Replace this with custom error 
 pub type DatabaseId = CompactString;
 pub type DataSchemaDiscoveryMethodId = CompactString;
 pub type ExternalDriverId = CompactString;
+
+pub type ExecutionStepId = CompactString;
 
 pub type UserId = usize;
 

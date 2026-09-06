@@ -5,8 +5,8 @@ use crate::*;
 
 use databases::*;
 
-use http_execute::*;
-use socket_execute::*;
+use http_executor::*;
+use socket_executor::*;
 
 /// Holds all the endpoints, is a wrapper of the `CheapVec<Endpoint>` type.
 #[derive(Clone, PartialEq, Serialize, Deserialize, Getters, MutGetters, Debug)]
@@ -199,10 +199,10 @@ pub struct HttpTarget {
     /// Method of the endpoint
     method: HttpMethod,
 
-    /// Establishes the endpoint handler. Note that if no executor is set, the server will try to handle the request internally.
+    /// Establishes the execution pipeline. Note that if no executor is set, the server will try to handle the request internally.
     #[serde(default, skip_serializing_if = "should_skip_option")]
     #[serde_as(as = "IfIsHumanReadable<_, JsonString>")] // Explore müsli to avoid this.
-    execute: Option<Arc<dyn AnyHttpExecute>>,
+    execution_pipeline: Option<ExecutionStep>,
 
     /// Sets the accepted query parameters.
     #[serde(default, skip_serializing_if = "should_skip_cheapvec")]
@@ -276,7 +276,7 @@ impl Default for HttpTarget {
             route: "".into(),
             version: None,
             method: HttpMethod::Get,
-            execute: None.into(),
+            execution_pipeline: None.into(),
             query_params: Default::default(),
             body_params: Default::default(),
             capture_all_params: false,
@@ -288,14 +288,14 @@ impl Default for HttpTarget {
 /// The socket endpoint definition.
 #[serde_as]
 #[derive(Clone, Serialize, Deserialize, Constructor, Builder, Getters, Display, Debug)]
-#[display("(Socket) {:?}", execute)]
+#[display("(Socket) {:?}", executor)]
 #[builder(default, pattern = "mutable", setter(strip_option))]
 #[getset(get = "pub")]
 pub struct SocketTarget {
     /// Establishes the endpoint handler.
     #[serde(default, skip_serializing_if = "should_skip_option")]
     #[serde_as(as = "IfIsHumanReadable<_, JsonString>")] // Explore müsli to avoid this.
-    execute: Option<Arc<dyn AnySocketExecute>>,
+    executor: Option<Arc<dyn AnySocketExecutor>>,
 }
 
 impl Into<ExecutionTarget> for SocketTarget {
@@ -312,6 +312,6 @@ impl PartialEq for SocketTarget {
 
 impl Default for SocketTarget {
     fn default() -> Self {
-        Self { execute: None }
+        Self { executor: None }
     }
 }

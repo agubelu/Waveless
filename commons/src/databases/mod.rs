@@ -5,8 +5,6 @@ use crate::*;
 
 use object::*;
 
-// use sea_orm::Value; // Switched from sqlx, as sqlx doesn't support conversion into JSON for arbitrary schemas.
-
 pub type DbConns = HashMap<DatabaseId, Arc<dyn AnyDatabaseConnection>>;
 
 /// The database's connections' pools manager.

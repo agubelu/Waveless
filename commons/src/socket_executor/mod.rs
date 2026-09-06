@@ -12,7 +12,7 @@ use databases::*;
 /// Generic methods trait to handle requests to the endpoints.
 #[typetag::serde]
 #[async_trait]
-pub trait AnySocketExecute: AnyExt {
+pub trait AnySocketExecutor: AnyExt {
     /// Executes a query using the given executor and database connection.
     async fn execute(
         &self,

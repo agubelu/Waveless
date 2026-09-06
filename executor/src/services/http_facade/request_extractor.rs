@@ -7,7 +7,7 @@ use crate::*;
 #[derive(Clone, Constructor, Debug)]
 pub struct RequestExtractor<S>
 where
-    S: Service<RequestCx, Response = HttpResponse, Error = RequestError>,
+    S: Service<RequestCx, Response = ResponseCx, Error = RequestError>,
 {
     inner: S,
 }
@@ -16,7 +16,7 @@ pub struct RequestExtractorLayer;
 
 impl<S> Layer<S> for RequestExtractorLayer
 where
-    S: Service<RequestCx, Response = HttpResponse, Error = RequestError>,
+    S: Service<RequestCx, Response = ResponseCx, Error = RequestError>,
 {
     type Service = RequestExtractor<S>;
 
@@ -27,7 +27,7 @@ where
 
 impl<S> Service<RequestCx> for RequestExtractor<S>
 where
-    S: Service<RequestCx, Response = HttpResponse, Error = RequestError> + Clone + Send + 'static,
+    S: Service<RequestCx, Response = ResponseCx, Error = RequestError> + Clone + Send + 'static,
     S::Future: Send + 'static,
     S::Response: Send + 'static,
     S::Error: Send + 'static,

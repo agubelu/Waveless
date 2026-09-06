@@ -16,7 +16,7 @@ pub struct ExecuteWrapperLayer;
 
 impl<S> Layer<S> for ExecuteWrapperLayer
 where
-    S: Service<RequestCx, Response = HttpResponse, Error = RequestError>,
+    S: Service<RequestCx, Response = ResponseCx, Error = RequestError>,
 {
     type Service = ExecuteWrapper<S>;
 
@@ -27,7 +27,7 @@ where
 
 impl<S> Service<RequestCx> for ExecuteWrapper<S>
 where
-    S: Service<RequestCx, Response = HttpResponse, Error = RequestError> + Clone + Send + 'static,
+    S: Service<RequestCx, Response = ResponseCx, Error = RequestError> + Clone + Send + 'static,
     S::Future: Send + 'static,
     S::Response: Send + 'static,
     S::Error: Send + 'static,
@@ -78,14 +78,11 @@ where
 
             match fut.await {
                 Ok(execute_response) => {
-                    if let Some(response_headers) = execute_response.headers() {
-                        let headers = response.headers_mut().unwrap();
+                    let headers = response.headers_mut().unwrap();
 
-                        for (key, value) in response_headers {
-                            headers.insert(HeaderName::from_bytes(key.as_bytes()).unwrap(), HeaderValue::from_bytes(value.as_bytes()).unwrap());
-                        }
+                    for (key, value) in execute_response.headers() {
+                        headers.insert(HeaderName::from_bytes(key.as_bytes()).unwrap(), HeaderValue::from_bytes(value.as_bytes()).unwrap());
                     }
-
 
                     match execute_response.body() {
                         Some(BodyValue::Json(value)) => {

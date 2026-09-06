@@ -8,7 +8,7 @@ use crate::*;
 pub struct LogoutSvc;
 
 impl Service<RequestCx> for LogoutSvc {
-    type Response = HttpResponse;
+    type Response = ResponseCx;
 
     type Error = RequestError;
 
@@ -76,7 +76,7 @@ impl Service<RequestCx> for LogoutSvc {
 
             session_method.invalidate(db_conns, user_id, token).await?;
 
-            Ok(HttpResponse::new(None, Some(BodyValue::Json(json!({})))))
+            Ok(ResponseCx::new(Default::default(), Some(BodyValue::Json(json!({})))))
         })
         .into();
 

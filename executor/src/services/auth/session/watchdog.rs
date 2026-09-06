@@ -7,7 +7,7 @@ use crate::*;
 #[derive(Clone, Constructor, Debug)]
 pub struct SessionWatchdog<S>
 where
-    S: Service<RequestCx, Response = HttpResponse, Error = RequestError>,
+    S: Service<RequestCx, Response = ResponseCx, Error = RequestError>,
 {
     inner: S,
 }
@@ -16,7 +16,7 @@ pub struct SessionWatchdogLayer;
 
 impl<S> Layer<S> for SessionWatchdogLayer
 where
-    S: Service<RequestCx, Response = HttpResponse, Error = RequestError>,
+    S: Service<RequestCx, Response = ResponseCx, Error = RequestError>,
 {
     type Service = SessionWatchdog<S>;
 
@@ -27,7 +27,7 @@ where
 
 impl<S> Service<RequestCx> for SessionWatchdog<S>
 where
-    S: Service<RequestCx, Response = HttpResponse, Error = RequestError> + Clone + Send + 'static,
+    S: Service<RequestCx, Response = ResponseCx, Error = RequestError> + Clone + Send + 'static,
     S::Future: Send + 'static,
     S::Response: Send + 'static,
     S::Error: Send + 'static,

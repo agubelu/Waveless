@@ -16,9 +16,9 @@ pub use services::*;
 use waveless_commons::*;
 
 use waveless_commons::endpoint::*;
-use waveless_commons::http_execute::{request_cx::*, *};
+use waveless_commons::http_executor::{request_cx::*, *};
 use waveless_commons::object::*;
-use waveless_commons::socket_execute::handshake_cx::*;
+use waveless_commons::socket_executor::handshake_cx::*;
 
 use rustyrosetta::*;
 

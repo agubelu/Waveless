@@ -8,7 +8,7 @@ use crate::*;
 pub struct LoginSvc;
 
 impl Service<RequestCx> for LoginSvc {
-    type Response = HttpResponse;
+    type Response = ResponseCx;
 
     type Error = RequestError;
 
@@ -122,7 +122,7 @@ impl Service<RequestCx> for LoginSvc {
                         .into(),
                     );
 
-                    Ok(HttpResponse::new(Some(headers), Some(BodyValue::Json(
+                    Ok(ResponseCx::new(headers, Some(BodyValue::Json(
                         json!({
                             "token": session_token
                         }),
