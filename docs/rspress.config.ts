@@ -9,13 +9,9 @@ export default defineConfig({
     root: path.join(__dirname, "src"),
     outDir: path.join(__dirname, "doc_build"),
     title: "Waveless",
+    base: "/Waveless",
     plugins: [katex(), viz(), pluginLlms()],
     globalStyles: path.join(__dirname, "theme/main.css"),
-    builderConfig: {
-        output: {
-            assetPrefix: "Waveless",
-        },
-    },
     themeConfig: {
         lastUpdated: {
             author: true,
