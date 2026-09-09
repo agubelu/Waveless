@@ -11,8 +11,11 @@
     {
         "text": "API reference",
         "items": [
-            { "text": "Guide", "link": "/guide/" },
-            { "text": "API", "link": "/api/" }
+            {
+                "text": "waveless_commons",
+                "link": "/auto_api/waveless_commons/index.html"
+            },
+            { "text": "API", "link": "/" }
         ]
     },
     {

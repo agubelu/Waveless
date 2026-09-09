@@ -1,10 +1,10 @@
 name: Deploy docs
 
 on:
-    workflow_run:
-        workflows: ["release"] # Must match the exact `name:` inside release.yml
-        types:
-            - completed
+    pull_request:
+    push:
+        tags:
+            - "**[0-9]+.[0-9]+.[0-9]+*"
 
 permissions:
     contents: read
@@ -22,9 +22,18 @@ jobs:
             name: github-pages
             url: ${{ steps.deployment.outputs.page_url }}
         runs-on: ubuntu-latest
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
         steps:
             - name: Install Rust toolchain
               uses: dtolnay/rust-toolchain@stable
+
+            - name: Setup Bun
+              uses: oven-sh/setup-bun@v2
+              with:
+                  bun-version: latest
+
+            - name: Checkout repository
+              uses: actions/checkout@v4
 
             - name: Setup Rust cache
               uses: Swatinem/rust-cache@v2
@@ -39,29 +48,14 @@ jobs:
                   restore-keys: |
                       ${{ runner.os }}-bun-
 
-            - name: Setup Bun
-              uses: oven-sh/setup-bun@v2
-              with:
-                  bun-version: latest
-
-            - name: Checkout repository
-              uses: actions/checkout@v4
-
-            - name: Generate rustdocs
-              run: cargo doc-all
-
-            - name: Copy Rustdoc to Rspress public directory
-              run: |
-                  mkdir -p docs/public/rustdoc
-                  cp -r target/doc/* docs/public/rustdoc/
-
             - name: Install frontend dependencies
               working-directory: docs
               run: bun install
 
-            - name: Build docs
+            - name: Generate rustdocs and copy them to docs' public directory
               working-directory: docs
-              run: bun run build
+              run: |
+                  bun run auto_api
 
             - name: Upload Pages artifact
               uses: actions/upload-pages-artifact@v3

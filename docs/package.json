@@ -4,25 +4,23 @@
     "private": true,
     "type": "module",
     "scripts": {
+        "auto_api": "cargo doc-all && mkdir -p src/public && cp -r ../target/doc src/public/auto_api",
         "build": "rspress build",
-        "check": "biome check --write",
         "dev": "rspress dev",
-        "format": "biome format --write",
         "preview": "rspress preview"
     },
     "dependencies": {
         "@rspress/core": "^2.0.21"
     },
     "devDependencies": {
-        "@biomejs/biome": "2.4.15",
-        "@rspress/plugin-llms": "^2.0.21",
-        "@types/node": "^25.9.5",
-        "@types/react": "^19.2.18",
-        "@types/react-dom": "^19.2.7",
+        "@types/node": "^25.9.6",
+        "@types/react": "^19.3.0",
+        "@types/react-dom": "^19.3.0",
         "@viz-js/viz": "^3.30.0",
-        "react": "^19.2.8",
-        "react-dom": "^19.2.8",
+        "react": "^19.3.0",
+        "react-dom": "^19.3.0",
         "rspress-plugin-katex": "^1.0.1",
-        "rspress-plugin-viz": "^0.2.6"
+        "rspress-plugin-viz": "^0.2.6",
+        "@rspress/plugin-llms": "^2.0.21"
     }
 }

@@ -1,5 +1,5 @@
 **/.DS_Store
-**/Cargo.lock
+**/*.lock
 **/package-lock.json
 **/pnpm-lock.yaml
 **/*.rs.bk
@@ -10,5 +10,6 @@
 **/node_modules
 **/target
 **/dist
+**/docs/src/public/auto_api
 **/doc_build
 **/test
