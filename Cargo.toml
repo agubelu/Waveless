@@ -6,8 +6,8 @@ resolver = "3"
 [workspace.package]
 description = "Bring your data model → generate fast, portable and battle-ready APIs 🚀."
 version = "0.2.1"
-homepage = "https://github.com/nv0skar/Waveless"
-repository = "https://github.com/nv0skar/Waveless"
+homepage = "https://github.com/nv0skar/waveless"
+repository = "https://github.com/nv0skar/waveless"
 edition = "2024"
 
 [workspace.dependencies]
@@ -150,7 +150,7 @@ features = ["wasm_js"]
 # style-file = "style/main.scss"
 # tailwind-input-file = "style/tailwind.css"
 
-[patch."https://github.com/nv0skar/Waveless"]
+[patch."https://github.com/nv0skar/waveless"]
 waveless = { path = "./frontend" }
 
 waveless_commons = { path = "./commons" }

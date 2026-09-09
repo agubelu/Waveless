@@ -18,13 +18,13 @@ export default defineConfig({
         },
         editLink: {
             docRepoBaseUrl:
-                "https://github.com/nv0skar/Waveless/tree/main/docs/src",
+                "https://github.com/nv0skar/waveless/tree/main/docs/src",
         },
         socialLinks: [
             {
                 icon: "github",
                 mode: "link",
-                content: "https://github.com/nv0skar/Waveless",
+                content: "https://github.com/nv0skar/waveless",
             },
         ],
         llmsUI: true,
