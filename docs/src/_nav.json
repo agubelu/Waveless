@@ -15,7 +15,14 @@
                 "text": "waveless_commons",
                 "link": "/auto_api/waveless_commons/index.html"
             },
-            { "text": "API", "link": "/" }
+            {
+                "text": "waveless_compiler",
+                "link": "/auto_api/waveless_compiler/index.html"
+            },
+            {
+                "text": "waveless_runtime",
+                "link": "/auto_api/waveless_runtime/index.html"
+            }
         ]
     },
     {
