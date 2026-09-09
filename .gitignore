@@ -12,3 +12,5 @@
 **/dist
 **/doc_build
 **/test
+
+**/docs.yml

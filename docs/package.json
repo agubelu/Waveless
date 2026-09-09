@@ -11,14 +11,18 @@
         "preview": "rspress preview"
     },
     "dependencies": {
-        "@rspress/core": "^2.0.13"
+        "@rspress/core": "^2.0.21"
     },
     "devDependencies": {
         "@biomejs/biome": "2.4.15",
-        "@types/node": "^25.9.1",
-        "@types/react": "^19.2.15",
-        "@types/react-dom": "^19.2.3",
-        "react": "^19.2.6",
-        "react-dom": "^19.2.6"
+        "@rspress/plugin-llms": "^2.0.21",
+        "@types/node": "^25.9.5",
+        "@types/react": "^19.2.18",
+        "@types/react-dom": "^19.2.7",
+        "@viz-js/viz": "^3.30.0",
+        "react": "^19.2.8",
+        "react-dom": "^19.2.8",
+        "rspress-plugin-katex": "^1.0.1",
+        "rspress-plugin-viz": "^0.2.6"
     }
 }

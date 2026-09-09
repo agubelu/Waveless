@@ -1,0 +1,12 @@
+[
+    {
+        "type": "dir-section-header",
+        "name": "start",
+        "label": "First steps"
+    },
+    {
+        "type": "dir-section-header",
+        "name": "reference",
+        "label": "Reference"
+    }
+]

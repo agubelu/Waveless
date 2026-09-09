@@ -3,9 +3,6 @@ run-frontend = "run --package waveless --bin waveless --all-features"
 test-all = "test --all-features -- --nocapture"
 doc-all = "doc --workspace --no-deps"
 
-[build]
-rustdocflags = ["-Zunstable-options", "--enable-index-page"]
-
 [target.aarch64-apple-darwin]
 rustflags = [
     "--cfg",

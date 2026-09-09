@@ -1,0 +1,106 @@
+:root {
+    --rp-c-brand: #ec4899;
+    --rp-c-brand-dark: #ea318c;
+    --rp-c-brand-darker: #e71a7f;
+    --rp-c-brand-light: #f176b3;
+    --rp-c-brand-lighter: #f6a4cd;
+    --rp-c-brand-tint: rgba(236, 72, 153, 0.15);
+
+    --rp-c-bg: #fafafa;
+    --rp-c-bg-soft: #f3f4f5;
+    --rp-c-bg-mute: #e6e8ea;
+
+    --rp-c-text-1: #5c6166;
+    --rp-c-text-2: #8a9199;
+    --rp-c-text-3: #abb2bf;
+
+    --rp-c-divider: #e6e8ea;
+    --rp-code-bg: #f3f4f5;
+
+    --rp-content-max-width: 100% !important;
+    --rp-content-width: 100% !important;
+}
+
+html.dark {
+    --rp-c-brand: #ec4899;
+    --rp-c-brand-dark: #ea318c;
+    --rp-c-brand-darker: #e71a7f;
+    --rp-c-brand-light: #f176b3;
+    --rp-c-brand-lighter: #f6a4cd;
+    --rp-c-brand-tint: rgba(236, 72, 153, 0.15);
+
+    --rp-c-bg: #0f1319;
+    --rp-c-bg-soft: #141920;
+    --rp-c-bg-mute: #1c2330;
+
+    --rp-c-text-1: #e6e1cf;
+    --rp-c-text-2: #9da7b3;
+    --rp-c-text-3: #626c7a;
+
+    --rp-c-divider: #1c2330;
+    --rp-code-bg: #141920;
+}
+
+.rp-doc-layout__sidebar {
+    max-width: 12rem !important;
+    min-width: 6rem !important;
+}
+
+.rp-nav__title__link {
+    font-weight: 900 !important;
+}
+
+.rp-home-hero__title-brand {
+    font-weight: 900 !important;
+    color: white !important;
+    background: none !important;
+    -webkit-text-fill-color: unset !important;
+}
+
+.rp-home-hero__subtitle {
+    font-weight: 400 !important;
+}
+
+h1.rp-toc-include {
+    font-weight: 900 !important;
+}
+
+h2.rp-toc-include {
+    margin-top: 1rem !important;
+
+    &:before {
+        margin: 2rem 0 1rem 0 !important;
+    }
+}
+
+.rp-doc-layout__doc-container {
+    padding: 2rem !important;
+}
+
+.rp-doc-layout__sidebar {
+    padding: 1rem !important;
+}
+
+.rp-toc-include {
+    margin-bottom: 1rem !important;
+}
+
+.rp-not-doc {
+    margin-bottom: 0 !important;
+}
+
+.rp-doc-footer__divider {
+    margin: 1rem !important;
+}
+
+html.dark .rspress-nav,
+html.dark .rspress-sidebar {
+    background-color: #0f1319 !important;
+    border-color: #1c2330 !important;
+}
+
+html.dark .rspress-doc pre,
+html.dark .rspress-doc code {
+    background-color: #141920 !important;
+    border: 1px solid #1c2330;
+}

@@ -1,0 +1,22 @@
+[
+    {
+        "text": "Guide",
+        "link": "/guide/introduction",
+        "activeMatch": "/guide/"
+    },
+    {
+        "text": "Latest release",
+        "link": "https://github.com/nv0skar/Waveless/releases/latest"
+    },
+    {
+        "text": "API reference",
+        "items": [
+            { "text": "Guide", "link": "/guide/" },
+            { "text": "API", "link": "/api/" }
+        ]
+    },
+    {
+        "text": "Oscar AG",
+        "link": "https://nv0skar.eu.org"
+    }
+]

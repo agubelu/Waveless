@@ -1,0 +1,9 @@
+[
+    "setup",
+    "endpoint",
+    {
+        "type": "dir",
+        "name": "extensions",
+        "label": "Extensions"
+    }
+]
