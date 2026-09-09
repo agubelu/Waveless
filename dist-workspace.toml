@@ -14,7 +14,3 @@ ci = "github"
 install-updater = false
 github-build-setup = "../setup_build.yml"
 install-path = "CARGO_HOME"
-
-[[dist.extra-artifacts]]
-artifacts = ["target/doc"]
-build = ["sh", "-c", "cargo doc-all && tar -czf target/rustdoc.tar.gz -C target/doc ."]

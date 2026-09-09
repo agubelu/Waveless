@@ -23,6 +23,14 @@ jobs:
             url: ${{ steps.deployment.outputs.page_url }}
         runs-on: ubuntu-latest
         steps:
+            - name: Install Rust toolchain
+              uses: dtolnay/rust-toolchain@stable
+
+            - name: Setup Rust cache
+              uses: Swatinem/rust-cache@v2
+              with:
+                  cache-all-crates: true
+
             - name: Cache Bun dependencies
               uses: actions/cache@v4
               with:
@@ -39,44 +47,26 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v4
 
+            - name: Generate rustdocs
+              run: cargo doc-all
+
+            - name: Copy Rustdoc to Rspress public directory
+              run: |
+                  mkdir -p docs/public/rustdoc
+                  cp -r target/doc/* docs/public/rustdoc/
+
             - name: Install frontend dependencies
+              working-directory: docs
               run: bun install
 
-            - name: Fetch Release Tag Name
-              id: release_info
-              env:
-                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: |
-                  HEAD_BRANCH="${{ github.event.workflow_run.head_branch }}"
-                  echo "tag=$HEAD_BRANCH" >> $GITHUB_OUTPUT
-
-            - name: Download rustdocs from release
-              env:
-                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: |
-                  mkdir -p tmp_download
-                  gh release download "${{ github.event.workflow_run.head_branch }}" \
-                    --dir tmp_download \
-                    --pattern "rustdoc.tar.gz"
-
-            - name: Extract archive
-              run: |
-                  mkdir -p public/rustdoc
-                  ARCHIVE=$(find tmp_download -type f \( -name "*.tar.gz" -o -name "*.tar.xz" -o -name "*.zip" \) | head -n 1)
-
-                  if [[ "$ARCHIVE" == *.zip ]]; then
-                  unzip "$ARCHIVE" -d public/rustdoc
-                  else
-                  tar -xf "$ARCHIVE" -C public/rustdoc --strip-components=1
-                  fi
-
             - name: Build docs
+              working-directory: docs
               run: bun run build
 
             - name: Upload Pages artifact
               uses: actions/upload-pages-artifact@v3
               with:
-                  path: "./doc_build"
+                  path: "docs/doc_build"
 
             - name: Deploy to GitHub Pages
               id: deployment
