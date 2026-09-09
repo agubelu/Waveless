@@ -13,7 +13,7 @@ export default defineConfig({
     globalStyles: path.join(__dirname, "theme/main.css"),
     builderConfig: {
         output: {
-            assetPrefix: "auto",
+            assetPrefix: "Waveless",
         },
     },
     themeConfig: {
