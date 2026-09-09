@@ -7,7 +7,7 @@
 
 use waveless_commons::{logging::*, object::*, runtime::handle_main, *};
 use waveless_compiler::{compiler_cx::*, new::*, workspace::*};
-use waveless_executor::{frontend_options::*, server::serve, *};
+use waveless_runtime::{frontend_options::*, server::serve, *};
 
 use databases::*;
 

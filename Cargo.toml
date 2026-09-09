@@ -1,5 +1,5 @@
 [workspace]
-members = ["commons", "compiler", "executor", "frontend"]
+members = ["commons", "compiler", "runtime", "frontend"]
 default-members = ["compiler"]
 resolver = "3"
 
@@ -15,7 +15,7 @@ waveless = { path = "./frontend" }
 
 waveless_commons = { path = "./commons" }
 waveless_compiler = { path = "./compiler" }
-waveless_executor = { path = "./executor" }
+waveless_runtime = { path = "./runtime" }
 
 waveless_sql = { git = "https://github.com/nv0skar/waveless_sql.git" }
 
@@ -155,7 +155,7 @@ waveless = { path = "./frontend" }
 
 waveless_commons = { path = "./commons" }
 waveless_compiler = { path = "./compiler" }
-waveless_executor = { path = "./executor" }
+waveless_runtime = { path = "./runtime" }
 
 [profile.dev.package."*"]
 debug = false
