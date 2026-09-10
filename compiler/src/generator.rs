@@ -16,7 +16,7 @@ pub struct GeneratedEndpoints(CheapVec<(Bytes, (Endpoints, Option<EndpointGenera
 
 impl GeneratedEndpoints {
     /// Discovers all endpoints from the project's database and calculate the checksum per database.
-    /// TODO: Maybe the endpoint generation logic should be delegated to the `AnyDataSchemaDiscoveryMethod` trait.
+    /// TODO: Maybe the endpoint generation logic should be delegated to the [`AnyEndpointGenerator`](trait@waveless_commons::endpoint::generator::AnyEndpointGenerator) trait.
     #[instrument(skip_all)]
     pub async fn generate() -> Result<Self> {
         let cx = CompilerCx::acquire();

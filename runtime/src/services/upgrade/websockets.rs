@@ -78,7 +78,7 @@ impl Service<RequestCx> for WebSocketsSvc {
             let auth = endpoint.auth();
 
             // Enforce socket endpoint's authentication.
-            // TODO: maybe do this in the `SessionWatchdog` and enforce roles.
+            // TODO: maybe do this in the [`SessionWatchdog`](waveless_runtime::services::SessionWatchdog) and enforce roles.
             if let AuthLevel::Required = auth.level()
                 && request_params.get("user_id").is_none()
             {

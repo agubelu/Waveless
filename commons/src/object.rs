@@ -11,9 +11,8 @@
 //!
 use crate::*;
 
-use endpoint::*;
+use endpoint::{generator::*, *};
 use project::*;
-use schema::*;
 
 /// The project's build artifact.
 #[derive(Clone, PartialEq, Constructor, Serialize, Deserialize, Getters, MutGetters, Debug)]
@@ -99,7 +98,7 @@ impl Default for EndpointGeneratorChecksum {
     }
 }
 
-/// Note that for this test both `waveless_config`'s and `waveless_schema`'s `postcard_codec` flag is set, this will be disable some Serde attributes as skipping field serialization and enum type format.
+/// Note that for this test `postcard_codec` flag must be set, this will be disable some serde attributes as skipping field serialization and enum type format.
 #[cfg(test)]
 mod tests {
     use super::*;

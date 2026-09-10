@@ -18,7 +18,7 @@ impl CompilerCx {
             .unwrap()
     }
 
-    /// Sets the `COMPILER_CX`'s `OnceLock`.
+    /// Sets the [`COMPILER_CX`]'s `OnceLock`.
     /// NOTE: If compiler's context is set this method will panic.
     pub fn set_cx(self) {
         if !COMPILER_CX.initialized() {

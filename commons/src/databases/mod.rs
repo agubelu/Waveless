@@ -8,7 +8,6 @@ use object::*;
 pub type DbConns = HashMap<DatabaseId, Arc<dyn AnyDatabaseConnection>>;
 
 /// The database's connections' pools manager.
-/// The primary database won't be in the `ArrayVec` for efficiency.
 #[derive(Clone, Constructor, Debug)]
 pub struct DatabasesManager {
     inner: HashMap<DatabaseId, Arc<dyn AnyDatabaseConnection>>,
@@ -59,7 +58,7 @@ pub enum DatabaseOutput {
 }
 
 impl DatabasesManager {
-    /// Creates a new databases pools manager and loads it into the `DATABASE_POOL`'s `OnceCell`.
+    /// Creates a new databases pools manager and loads it into the [`DATABASES_CONNS`] 's `OnceCell`.
     #[instrument(skip_all)]
     pub async fn load(databases: CheapVec<project::DatabaseConfig>) -> Result<()> {
         if !databases.iter().any(|db| *db.is_primary()) {

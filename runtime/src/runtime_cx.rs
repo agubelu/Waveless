@@ -19,7 +19,7 @@ impl RuntimeCx {
             .unwrap()
     }
 
-    /// Sets the `RUNTIME_CX`'s `OnceLock`.
+    /// Sets the [`RUNTIME_CX`]'s `OnceLock`.
     /// NOTE: If runtime's context is set this method will panic.
     pub fn set_cx(self) {
         if !RUNTIME_CX.initialized() {

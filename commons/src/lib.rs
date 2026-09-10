@@ -9,7 +9,6 @@ pub mod http_executor;
 pub mod logging;
 pub mod object;
 pub mod project;
-pub mod schema;
 pub mod socket_executor;
 
 #[cfg(not(target_arch = "wasm32"))]

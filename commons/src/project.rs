@@ -3,7 +3,7 @@
 
 //!
 //! The Waveless's project's 'project.toml' file will be divided into: compiler settings, runtime settings, authentication and database authentication credentials
-//! Both Authentication and CheapVec<DatabaseAuth> will be shared with the compiler and the runtime.
+//! Both Authentication and [`CheapVec<DatabaseAuth>`] will be shared with the compiler and the runtime.
 //!
 //! TODO: maybe implement default variants
 //!
@@ -12,8 +12,7 @@ use crate::*;
 
 use auth::*;
 use databases::*;
-use endpoint::*;
-use schema::*;
+use endpoint::{generator::*, *};
 
 /// Includes all the project's config
 #[derive(Clone, PartialEq, Constructor, Serialize, Deserialize, Getters, MutGetters, Debug)]
@@ -87,10 +86,10 @@ pub struct Compiler {
     /// Defines the compiler's strategy to analyze the databases' data schema
     /// to generate endpoints.
     /// NOTE: there might be many different types that implement the
-    /// `AnyEndpointGenerator` trait for a single database type.
+    /// [`AnyEndpointGenerator`] trait for a single database type.
     /// For example, given a single database type (like MySQL), there might be an
     /// ad-hoc schema discovery implementation and a simple endpoint geneator,
-    /// also, there might be a more complex `AnyEndpointGenerator` that
+    /// also, there might be a more complex [`AnyEndpointGenerator`] that
     /// chains the internal MySQL schema analyzer and enhances the endpoint generation.
     #[serde(default, skip_serializing_if = "should_skip_cheapvec")]
     endpoint_generators: CheapVec<EndpointGeneratorConfig>,

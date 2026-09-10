@@ -1,6 +1,8 @@
 // Waveless
 // Copyright (C) 2026 Oscar Alvarez Gonzalez
 
+pub mod generator;
+
 use crate::*;
 
 use databases::*;
@@ -8,7 +10,7 @@ use databases::*;
 use http_executor::*;
 use socket_executor::*;
 
-/// Holds all the endpoints, is a wrapper of the `CheapVec<Endpoint>` type.
+/// Holds all the endpoints, is a wrapper of the [`CheapVec<Endpoint>`] type.
 #[derive(Clone, PartialEq, Serialize, Deserialize, Getters, MutGetters, Debug)]
 #[getset(get = "pub", get_mut = "pub")]
 #[serde(default)]
